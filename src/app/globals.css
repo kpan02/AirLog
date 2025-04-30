@@ -120,3 +120,36 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Datepicker from add flights form */
+.react-datepicker-wrapper {
+  width: 100%;
+}
+
+.react-datepicker__input-container {
+  width: 100%;
+}
+
+.react-datepicker {
+  font-family: inherit;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  background-color: white;
+}
+
+.react-datepicker__header {
+  background-color: white;
+  border-bottom: 1px solid #e2e8f0;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.react-datepicker__year-dropdown {
+  background-color: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+}
+
+.react-datepicker__year-option:hover {
+  background-color: white;
+}
