@@ -301,7 +301,7 @@ export default function AddFlightForm({ onSuccess }: AddFlightFormProps) {
         <span className="text-red-500">*</span> Required fields
     </div>
 
-    <Button type="submit" className="w-full hover:scale-[1.01] bg-primary/75">
+    <Button type="submit" className="w-full hover:scale-[1.01] bg-primary/75 cursor-pointer">
         Add Flight
     </Button>
     
