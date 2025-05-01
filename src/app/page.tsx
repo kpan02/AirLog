@@ -11,11 +11,19 @@ import { useState } from "react"
 import { toast, Toaster } from "sonner"
 import { Autocomplete } from "@mui/material"
 import { TextField } from "@mui/material"
+import { createFilterOptions } from "@mui/material/Autocomplete";
 
 import dayjs from 'dayjs';
 import { searchAirports, findAirportByCode } from "@/lib/airports";
 import { Airport } from "@/data/types";
 
+type AirportOption = {
+  label: string;
+  code: string;
+  municipality?: string;
+};
+
+const filterAirports = createFilterOptions<AirportOption>();
 
 export default function Home() {
   const [date, setDate] = useState<dayjs.Dayjs | null>(null);
@@ -141,8 +149,19 @@ export default function Home() {
                   freeSolo
                   options={departureOptions.map((airport) => ({
                     label: `${airport.name} (${airport.iata_code})`,
-                    code: airport.iata_code
+                    code: airport.iata_code,
+                    municipality: airport.municipality,
                   }))}
+                  filterOptions={(options, { inputValue }) =>
+                    options.filter((option) => {
+                      const search = inputValue.toLowerCase();
+                      return (
+                        option.code.toLowerCase().includes(search) ||
+                        option.label.toLowerCase().includes(search) ||
+                        (option.municipality && option.municipality.toLowerCase().includes(search))
+                      );
+                    })
+                  }
                   inputValue={departureAirport}
                   getOptionLabel={(option) => {
                     if (typeof option === "string") return option;
@@ -183,8 +202,19 @@ export default function Home() {
                   freeSolo
                   options={arrivalOptions.map((airport) => ({
                     label: `${airport.name} (${airport.iata_code})`,
-                    code: airport.iata_code
+                    code: airport.iata_code,
+                    municipality: airport.municipality,
                   }))}
+                  filterOptions={(options, { inputValue }) =>
+                    options.filter((option) => {
+                      const search = inputValue.toLowerCase();
+                      return (
+                        option.code.toLowerCase().includes(search) ||
+                        option.label.toLowerCase().includes(search) ||
+                        (option.municipality && option.municipality.toLowerCase().includes(search))
+                      );
+                    })
+                  }
                   inputValue={arrivalAirport}
                   getOptionLabel={(option) => {
                     if (typeof option === "string") return option;
