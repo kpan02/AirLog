@@ -7,11 +7,11 @@ export function findAirportByCode(code: string): Airport | undefined {
 }
 
 export function searchAirports(query: string): Airport[] {
-    const searchTerm = query.toLowerCase();
+    const searchTerm = query.toUpperCase();
     return airports.filter(a => 
-      a.name.toLowerCase().includes(searchTerm) ||
-      a.municipality.toLowerCase().includes(searchTerm) ||
-      a.iata_code.toLowerCase().includes(searchTerm)
+      a.name.toUpperCase().includes(searchTerm) ||
+      a.municipality.toUpperCase().includes(searchTerm) ||
+      a.iata_code.toUpperCase().includes(searchTerm)
     );
 }
 

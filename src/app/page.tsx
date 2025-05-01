@@ -9,8 +9,12 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useState } from "react"
 import { toast, Toaster } from "sonner"
+import { Autocomplete } from "@mui/material"
+import { TextField } from "@mui/material"
+
 import dayjs from 'dayjs';
 import { searchAirports, findAirportByCode } from "@/lib/airports";
+import { Airport } from "@/data/types";
 
 
 export default function Home() {
@@ -18,6 +22,27 @@ export default function Home() {
   const [flightNumber, setFlightNumber] = useState("")
   const [departureAirport, setDepartureAirport] = useState("")
   const [arrivalAirport, setArrivalAirport] = useState("")
+
+  const [departureOptions, setDepartureOptions] = useState<Airport[]>([]);
+  const [arrivalOptions, setArrivalOptions] = useState<Airport[]>([]);
+
+  const handleDepartureInput = (event: React.ChangeEvent<{}>, value: string) => {
+    setDepartureAirport(value);
+    if (value.trim() === "") {
+      setDepartureOptions([]);
+    } else {
+      setDepartureOptions(searchAirports(value));
+    }
+  };
+  
+  const handleArrivalInput = (event: React.ChangeEvent<{}>, value: string) => {
+    setArrivalAirport(value);
+    if (value.trim() === "") {
+      setArrivalOptions([]);
+    } else {
+      setArrivalOptions(searchAirports(value));
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,6 +92,8 @@ export default function Home() {
       setDepartureAirport('');
       setArrivalAirport('');
       setDate(null);
+      setDepartureOptions([]);
+      setArrivalOptions([]);
       
       toast.success('Flight saved successfully!');
   
@@ -109,12 +136,41 @@ export default function Home() {
                   Departure Airport
                   <span className="text-red-500 -ml-1.5">*</span>      
                 </Label>
-                <Input 
-                  id="departureAirport"
-                  placeholder="e.g., LAX"
-                  value={departureAirport}
-                  onChange={(e) => setDepartureAirport(e.target.value)}
+
+                <Autocomplete
+                  freeSolo
+                  options={departureOptions.map((airport) => ({
+                    label: `${airport.name} (${airport.iata_code})`,
+                    code: airport.iata_code
+                  }))}
+                  inputValue={departureAirport}
+                  getOptionLabel={(option) => {
+                    if (typeof option === "string") return option;
+                    return option.code;
+                  }}
+                  onInputChange={(_, value) => handleDepartureInput(_, value)}
+                  onChange={(_, value) => {
+                    if (typeof value === "string") {
+                      setDepartureAirport(value);
+                    } else if (value && typeof value === "object" && "code" in value) {
+                      setDepartureAirport(value.code);
+                    } else {
+                      setDepartureAirport("");
+                    }
+                  }}
+                  renderOption={(props, option) => {
+                    const { key, ...rest } = props;
+                    return (
+                      <li key={key} {...rest} className="text-sm px-2 py-1 hover:bg-gray-100 cursor-pointer">
+                        {option.label}
+                      </li>
+                    );
+                  }}
+                  renderInput={(params) => (
+                    <TextField {...params} label="" size="small" required />
+                  )}
                 />
+
               </div>
 
               <div className="space-y-2 flex-1">
@@ -122,11 +178,41 @@ export default function Home() {
                   Arrival Airport
                   <span className="text-red-500 -ml-1.5">*</span>
                 </Label>
-                <Input 
-                  id="arrivalAirport"
-                  value={arrivalAirport}
-                  onChange={(e) => setArrivalAirport(e.target.value)}
+
+                <Autocomplete
+                  freeSolo
+                  options={arrivalOptions.map((airport) => ({
+                    label: `${airport.name} (${airport.iata_code})`,
+                    code: airport.iata_code
+                  }))}
+                  inputValue={arrivalAirport}
+                  getOptionLabel={(option) => {
+                    if (typeof option === "string") return option;
+                    return option.code;
+                  }}
+                  onInputChange={(_, value) => handleArrivalInput(_, value)}
+                  onChange={(_, value) => {
+                    if (typeof value === "string") {
+                      setArrivalAirport(value);
+                    } else if (value && typeof value === "object" && "code" in value) {
+                      setArrivalAirport(value.code);
+                    } else {
+                      setArrivalAirport("");
+                    }
+                  }}
+                  renderOption={(props, option) => {
+                    const { key, ...rest } = props;
+                    return (
+                      <li key={key} {...rest} className="text-sm px-2 py-1 hover:bg-gray-100 cursor-pointer">
+                        {option.label}
+                      </li>
+                    );
+                  }}
+                  renderInput={(params) => (
+                    <TextField {...params} label="" size="small" required />
+                  )}
                 />
+
               </div>
             </div>
             
