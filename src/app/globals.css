@@ -153,3 +153,14 @@
 .react-datepicker__year-option:hover {
   background-color: white;
 }
+
+/* Hide scrollbars on the popper and paper */
+.MuiAutocomplete-popper,
+.MuiAutocomplete-paper {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
+}
+.MuiAutocomplete-popper::-webkit-scrollbar,
+.MuiAutocomplete-paper::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}

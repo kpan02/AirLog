@@ -3,7 +3,7 @@ import { Airport } from './types';
 
 export const airports: Airport[] = [
   {
-    "name": "İstanbul Airport",
+    "name": "Istanbul Airport",
     "latitude_deg": 41.261297,
     "longitude_deg": 28.741951,
     "iso_country": "TR",
@@ -11,7 +11,7 @@ export const airports: Airport[] = [
     "iata_code": "IST"
   },
   {
-    "name": "Çukurova International Airport",
+    "name": "Cukurova International Airport",
     "latitude_deg": 36.890908,
     "longitude_deg": 35.070522,
     "iso_country": "TR",
