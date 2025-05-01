@@ -15,7 +15,7 @@ export async function GET() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const testQuery = await db.select().from(flights).limit(1);
+    const testQuery = await db.select().from(flights);
     console.log('Test query result:', testQuery);
 
     return NextResponse.json({ success: true, data: testQuery });
