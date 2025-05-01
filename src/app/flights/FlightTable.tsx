@@ -1,7 +1,7 @@
 //src/app/flights/FlightTable.tsx
 "use client";
 
-import {useEffect, useState} from "react";
+import {useState, useEffect} from "react";
 import { Airport } from "@/data/types";
 import { findAirportByCode, searchAirports } from "@/lib/airports";
 import { Button } from "@/components/ui/button";
@@ -18,6 +18,8 @@ type Flight = {
 type AirportOption = { code: string; label: string };
 
 export default function FlightTable({ onAddFlight }: { onAddFlight: () => void }) {
+  const widgetHeight = '0.78rem';
+
   const [flights, setFlights] = useState<Flight[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -66,21 +68,20 @@ export default function FlightTable({ onAddFlight }: { onAddFlight: () => void }
       {/* Top Bar */}
       <div className="flex flex-wrap items-center gap-2 mb-4">
         {/* 1. Date Sort */}
-        <div className="flex items-center gap-1">
-          <span className="text-sm font-medium">Date</span>
+        <div className="border rounded px-2 py-1.5 text-sm flex items-center gap-1">
           <button
             type="button"
-            className="text-xs"
+            className="text-sm flex items-center gap-1 cursor-pointer"
             onClick={() => setSortDir(dir => (dir === "asc" ? "desc" : "asc"))}
             title="Toggle sort direction"
           >
-            {sortDir === "asc" ? "↑" : "↓"}
+            Date {sortDir === "asc" ? "🡓" : "🡑"}
           </button>
         </div>
 
         {/* 2. Year Filter */}
         <select
-          className="border rounded px-2 py-1 text-sm"
+          className="border rounded px-2 py-1.5 text-sm cursor-pointer"
           value={year ?? ""}
           onChange={e => setYear(e.target.value || null)}
         >
@@ -93,7 +94,12 @@ export default function FlightTable({ onAddFlight }: { onAddFlight: () => void }
         {/* 3. From Filter */}
         <Autocomplete
           size="small"
-          sx={{ width: 120 }}
+          sx={{
+            width: 100,
+            '& .MuiInputBase-input': {
+              fontSize: widgetHeight,
+            },
+          }}
           options={fromOptions}
           inputValue={from ?? ""}
           onInputChange={(_, value) => {
@@ -109,7 +115,7 @@ export default function FlightTable({ onAddFlight }: { onAddFlight: () => void }
           }}
           onChange={(_, value) => setFrom(value ? (typeof value === "string" ? value : value.code) : null)}
           getOptionLabel={option => (typeof option === "string" ? option : option.code)}
-          renderInput={params => <TextField {...params} label="From" />}
+          renderInput={params => <TextField {...params} label="From" sx={{ '& .MuiInputLabel-root': { fontSize: widgetHeight } }} />}
           clearOnBlur
           freeSolo
         />
@@ -117,7 +123,11 @@ export default function FlightTable({ onAddFlight }: { onAddFlight: () => void }
         {/* 4. To Filter */}
         <Autocomplete
           size="small"
-          sx={{ width: 120 }}
+          sx={{ width: 100,
+            '& .MuiInputBase-input': {
+              fontSize: widgetHeight,
+            },
+          }}
           options={toOptions}
           inputValue={to ?? ""}
           onInputChange={(_, value) => {
@@ -133,7 +143,7 @@ export default function FlightTable({ onAddFlight }: { onAddFlight: () => void }
           }}
           onChange={(_, value) => setTo(value ? (typeof value === "string" ? value : value.code) : null)}
           getOptionLabel={option => (typeof option === "string" ? option : option.code)}
-          renderInput={params => <TextField {...params} label="To" />}
+          renderInput={params => <TextField {...params} label="To" sx={{ '& .MuiInputLabel-root': { fontSize: widgetHeight } }} />}
           clearOnBlur
           freeSolo
         />
