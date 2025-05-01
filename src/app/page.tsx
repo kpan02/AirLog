@@ -8,8 +8,10 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { useState } from "react"
+import { toast, Toaster } from "sonner"
 import dayjs from 'dayjs';
 import { searchAirports, findAirportByCode } from "@/lib/airports";
+
 
 export default function Home() {
   const [date, setDate] = useState<dayjs.Dayjs | null>(null);
@@ -21,17 +23,22 @@ export default function Home() {
     e.preventDefault();
     
     if (!date || !departureAirport || !arrivalAirport) {
-      alert('Please fill in all fields');
+      toast.error('Please fill in all fields');
       return;
     }
 
     if (!findAirportByCode(departureAirport.toUpperCase())) {
-      alert('Invalid departure airport code');
+      toast.error('Invalid Departure Airport Code');
       return;
     }
 
     if (!findAirportByCode(arrivalAirport.toUpperCase())) {
-      alert('Invalid arrival airport code');
+      toast.error('Invalid Arrival Airport Code');
+      return;
+    }
+
+    if (departureAirport === arrivalAirport) {
+      toast.error('Departure and Arrival Airport cannot be the same');
       return;
     }
   
@@ -53,7 +60,6 @@ export default function Home() {
   
       if (!response.ok) {
         throw new Error(data.error || 'Failed to save flight');
-        // TODO: Change error to a toast
       }
   
       // Clear form on success
@@ -62,17 +68,24 @@ export default function Home() {
       setArrivalAirport('');
       setDate(null);
       
-      // TODO: Change alert to a toast
-      alert('Flight saved successfully!');
+      toast.success('Flight saved successfully!');
   
     } catch (error) {
       console.error('Error:', error);
-      alert('Failed to save flight. Please try again.');
+      toast.error('Failed to save flight. Please try again.');
     }
   };
 
   return (
     <main className="container mx-auto p-4">
+
+      {/* Notifications */}
+      <Toaster 
+        position="top-center"
+        duration={2000}
+        richColors
+      />
+
       <Card className="max-w-md mx-auto">
         <CardHeader>
           <CardTitle className="text-2xl text-center">AirLog✈️</CardTitle>
@@ -92,7 +105,10 @@ export default function Home() {
 
             <div className="flex gap-4">
               <div className="space-y-2 flex-1">
-                <Label htmlFor="departureAirport">Departure Airport</Label>
+                <Label htmlFor="departureAirport">
+                  Departure Airport
+                  <span className="text-red-500 -ml-1.5">*</span>      
+                </Label>
                 <Input 
                   id="departureAirport"
                   placeholder="e.g., LAX"
@@ -102,7 +118,10 @@ export default function Home() {
               </div>
 
               <div className="space-y-2 flex-1">
-                <Label htmlFor="arrivalAirport">Arrival Airport</Label>
+                <Label htmlFor="arrivalAirport">
+                  Arrival Airport
+                  <span className="text-red-500 -ml-1.5">*</span>
+                </Label>
                 <Input 
                   id="arrivalAirport"
                   value={arrivalAirport}
@@ -112,7 +131,10 @@ export default function Home() {
             </div>
             
             <div className="space-y-2">
-              <Label>Date</Label>
+              <Label>
+                Date
+                <span className="text-red-500 -ml-1.5">*</span>
+              </Label>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                   className="w-full"
@@ -135,9 +157,14 @@ export default function Home() {
               </LocalizationProvider>
             </div>
 
-            <Button type="submit" className="w-full">
+            <div className="text-xs text-gray-500 -mt-3 text-right">
+              <span className="text-red-500">*</span> Required fields
+            </div>
+
+            <Button type="submit" className="w-full hover:scale-[1.01] bg-primary/75">
               Add Flight
             </Button>
+            
           </form>
         </CardContent>
       </Card>
