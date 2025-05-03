@@ -4,13 +4,13 @@
 import { useState, useEffect } from "react";
 import { findAirportByCode, searchAirports } from "@/lib/airports";
 import { Button } from "@/components/ui/button";
-import { 
-    Autocomplete, 
-    TextField,
-    MenuItem 
-} from "@mui/material";
+import { Autocomplete, TextField, MenuItem } from "@mui/material";
+import { Dialog, DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog";
+import dayjs from "dayjs";
 
-type Flight = {
+import EditFlightForm from "./EditFlightForm";
+
+export type Flight = {
     id: string;
     flightNumber: string | null;
     departureAirport: string;
@@ -23,6 +23,11 @@ type AirportOption = {
     label: string;
 };
 
+type EditFlightFormProps = {
+    onSuccess?: () => void;
+    flight: Flight | null;
+};
+
 export default function FlightTable({ onAddFlight }: { onAddFlight: () => void }) {
     // State management
     const [flights, setFlights] = useState<Flight[]>([]);
@@ -33,6 +38,9 @@ export default function FlightTable({ onAddFlight }: { onAddFlight: () => void }
     const [to, setTo] = useState<string | null>(null);
     const [fromOptions, setFromOptions] = useState<AirportOption[]>([]);
     const [toOptions, setToOptions] = useState<AirportOption[]>([]);
+    const [editModalOpen, setEditModalOpen] = useState(false);
+    const [selectedFlight, setSelectedFlight] = useState<Flight | null>(null);
+
     
     // Fetch flights data
     useEffect(() => {
@@ -70,12 +78,8 @@ export default function FlightTable({ onAddFlight }: { onAddFlight: () => void }
         width: 100,
         background: "#f3f4f6",
         borderRadius: 1,
-        '& .MuiOutlinedInput-notchedOutline': {
-            borderColor: '#e5e7eb',
-        },
-        '&:hover .MuiOutlinedInput-notchedOutline': {
-            borderColor: '#d1d5db',
-        },
+        '& .MuiOutlinedInput-notchedOutline': { borderColor: '#e5e7eb' },
+        '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: '#d1d5db' },
     };
     
     const commonAutocompleteStyles = {
@@ -83,22 +87,11 @@ export default function FlightTable({ onAddFlight }: { onAddFlight: () => void }
         background: "#f3f4f6",
         color: "black",
         borderRadius: 1,
-        '& .MuiOutlinedInput-root': {
-            color: 'black',
-            background: "#f3f4f6",
-        },
-        '& .MuiOutlinedInput-notchedOutline': {
-            borderColor: '#e5e7eb',
-        },
-        '&:hover .MuiOutlinedInput-notchedOutline': {
-            borderColor: '#d1d5db',
-        },
-        '& .MuiInputLabel-root': {
-            color: 'black',
-        },
-        '& .MuiSvgIcon-root': {
-            color: 'black',
-        },
+        '& .MuiOutlinedInput-root': { color: 'black', background: "#f3f4f6" },
+        '& .MuiOutlinedInput-notchedOutline': { borderColor: '#e5e7eb' },
+        '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: '#d1d5db' },
+        '& .MuiInputLabel-root': { color: 'black' },
+        '& .MuiSvgIcon-root': { color: 'black' },
     };
     
     return (
@@ -233,7 +226,11 @@ export default function FlightTable({ onAddFlight }: { onAddFlight: () => void }
                     return (
                         <div
                             key={flight.id}
-                            className="flex items-center justify-between bg-white rounded-lg shadow border border-gray-300 p-4"
+                            className="flex items-center justify-between bg-white rounded-lg shadow border border-gray-300 p-4 cursor-pointer"
+                            onClick={() => {
+                                setSelectedFlight(flight);
+                                setEditModalOpen(true);
+                            }}
                         >
                             <div className="flex items-center gap-4">
                                 <span className="text-3xl">✈️</span>
@@ -250,11 +247,7 @@ export default function FlightTable({ onAddFlight }: { onAddFlight: () => void }
                             </div>
                             <div className="flex flex-col items-end">
                                 <div className="font-bold text-lg">
-                                    {new Date(flight.date).toLocaleDateString("en-US", {
-                                        day: "2-digit",
-                                        month: "short", 
-                                        year: "numeric",
-                                    })}
+                                    {dayjs(flight.date).format("MMM DD, YYYY")}
                                 </div>
                                 <div className="text-gray-500 text-sm">
                                     {flight.flightNumber ? `${flight.flightNumber}` : ""}
@@ -264,6 +257,22 @@ export default function FlightTable({ onAddFlight }: { onAddFlight: () => void }
                     );
                 })}
             </div>
+
+            <div className="flex justify-end mb-4">
+                <Dialog open={editModalOpen} onOpenChange={setEditModalOpen}>
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle className="text-xl font-bold text-center">Edit Flight</DialogTitle>
+                        </DialogHeader>
+                        <EditFlightForm
+                            flight={selectedFlight}
+                            onSuccess={() => setEditModalOpen(false)}
+                        />
+                    </DialogContent>
+                </Dialog>
+            </div>
+
+
         </div>
     );
 }

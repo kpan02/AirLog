@@ -7,6 +7,7 @@ import { Toaster} from "sonner";
 
 import AddFlightForm from "./flights/AddFlightForm";
 import FlightTable from "./flights/FlightTable";
+import EditFlightForm from "./flights/EditFlightForm";
 
 export default function Home() {
   const [open, setOpen] = useState(false);
@@ -16,9 +17,8 @@ export default function Home() {
       <h1 className="text-6xl font-bold text-center">AirLog</h1>
       <p className="text-gray-500 text-center mt-2 mb-8">Track your flights</p>
       <div className="h-4" />
+      
       <div className="flex justify-end mb-4">
-        
-
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogContent>
             <DialogHeader>

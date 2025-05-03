@@ -9,15 +9,12 @@ type InsertFlight = typeof flights.$inferInsert;
 export async function GET() {
   try {
     const { userId } = await auth();
-    console.log('User ID:', userId);
 
     if (!userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
     const testQuery = await db.select().from(flights);
-    console.log('Test query result:', testQuery);
-
     return NextResponse.json({ success: true, data: testQuery });
   } catch (err) {
     const error = err as Error;
@@ -26,14 +23,12 @@ export async function GET() {
       stack: error.stack,
       name: error.name
     });
-    return NextResponse.json({ 
+    return NextResponse.json({
       error: 'Internal Server Error',
-      details: error.message 
+      details: error.message
     }, { status: 500 });
   }
 }
-
-
 
 export async function POST(request: Request) {
   try {
@@ -63,17 +58,16 @@ export async function POST(request: Request) {
       .values(newFlight)
       .returning();
 
-    return NextResponse.json({ 
+    return NextResponse.json({
       success: true,
       flight: insertedFlight[0]
     });
-
   } catch (err) {
     const error = err as Error;
     console.error('Error saving flight:', error);
-    return NextResponse.json({ 
+    return NextResponse.json({
       error: 'Failed to save flight',
-      details: error.message 
+      details: error.message
     }, { status: 500 });
   }
 }
