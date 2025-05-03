@@ -12,6 +12,7 @@ type OverviewProps = {
     mostVisitedAirport: { code: string; name: string; count: number };
     topRoute: { from: string; to: string; count: number };
     longestFlight: { from: string; to: string; distance: number }; // distance in km
+    showActions?: boolean;
 };
 
 const Overview: React.FC<OverviewProps> = ({
@@ -23,6 +24,7 @@ const Overview: React.FC<OverviewProps> = ({
     mostVisitedAirport,
     topRoute,
     longestFlight,
+    showActions = true,
 }) => {
     return (
         <section
@@ -78,6 +80,40 @@ const Overview: React.FC<OverviewProps> = ({
                     <div className="text-xs opacity-60">{longestFlight.distance ? `${longestFlight.distance.toLocaleString()} mi` : ""}</div>
                 </div>
             </div>
+
+            {/* Action Buttons */}
+            {showActions && (
+            <div className="flex justify-center gap-3 mt-6">
+                <button
+                    className={`
+                        flex items-center justify-center
+                        w-40 py-1
+                        rounded-xl border border-white/20
+                        bg-white/10 text-white text-base font-medium
+                        shadow-sm backdrop-blur-md
+                        transition hover:bg-white/20 hover:border-white/40
+                        cursor-pointer
+                    `}
+                    onClick={() => window.location.href = "/stats"}
+                >
+                    All Flight Stats
+                </button>
+                <button
+                    className={`
+                        flex items-center justify-center
+                        w-40 py-1
+                        rounded-xl border border-white/20
+                        bg-white/10 text-white text-base font-medium
+                        shadow-sm backdrop-blur-md
+                        transition hover:bg-white/20 hover:border-white/40
+                        cursor-pointer
+                    `}
+                    onClick={() => window.location.href = "/map"}
+                >
+                    Flight Map
+                </button>
+            </div>
+            )}
         </section>
     );
 };

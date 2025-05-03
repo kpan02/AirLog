@@ -59,7 +59,9 @@ export default function Home() {
         </Dialog>
       </div>
 
+      {/* Travel Overview Card */}
       <Overview {...calculateStats(flights)}/>
+
       <h2 className="text-3xl font-bold mb-5 max-w-xl mx-auto">Flight Log</h2>
       <FlightTable 
         onAddFlight={() => setOpen(true)}
