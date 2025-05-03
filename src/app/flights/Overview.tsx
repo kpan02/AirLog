@@ -62,20 +62,20 @@ const Overview: React.FC<OverviewProps> = ({
                 {/* Most Visited Airport */}
                 <div className="col-span-3">
                     <div className="uppercase text-xs opacity-90">Top Airport</div>
-                    <div className="text-2xl font-bold">{mostVisitedAirport.code}</div>
-                    <div className="text-xs opacity-60">{mostVisitedAirport.count} times</div>
+                    <div className="text-2xl font-bold">{mostVisitedAirport?.code || "-"}</div>
+                    <div className="text-xs opacity-60">{mostVisitedAirport?.count ? `${mostVisitedAirport.count} times` : ""}</div>
                 </div>
                 {/* Top Routes */}
                 <div className="col-span-4 pl-3">
                     <div className="uppercase text-xs opacity-90">Top Route</div>
-                    <div className="text-2xl font-bold">{topRoute.from} → {topRoute.to}</div>
-                    <div className="text-xs opacity-60">{topRoute.count} times</div>
+                    <div className="text-2xl font-bold">{topRoute.from ? `${topRoute.from} → ${topRoute.to}` : "-"}</div>
+                    <div className="text-xs opacity-60">{topRoute.count ? `${topRoute.count} times` : ""}</div>
                 </div>
                 {/* Longest Flight */}
                 <div className="col-span-5 pl-10">
                     <div className="uppercase text-xs opacity-90">Longest Flight</div>
-                    <div className="text-2xl font-bold">{longestFlight.from} → {longestFlight.to}</div>              
-                    <div className="text-xs opacity-60">{longestFlight.distance.toLocaleString()} mi</div>
+                    <div className="text-2xl font-bold">{longestFlight.from ? `${longestFlight.from} → ${longestFlight.to}` : "-"}</div>              
+                    <div className="text-xs opacity-60">{longestFlight.distance ? `${longestFlight.distance.toLocaleString()} mi` : ""}</div>
                 </div>
             </div>
         </section>

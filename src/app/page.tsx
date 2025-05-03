@@ -39,8 +39,8 @@ export default function Home() {
 
   return (
     <main className="container mx-auto p-4">
-      <h1 className="text-6xl font-bold text-center">AirLog</h1>
-      <p className="text-gray-500 text-center mt-2 mb-5">Track your flights</p>
+      <img src="/airlog-logo.png" alt="AirLog" className="h-17 mx-auto" />
+      <p className="text-gray-500 text-center mt-2 mb-5 font-mono opacity-80">Track your flights</p>
       <div className="h-4" />
       
       <div className="flex justify-end mb-4">

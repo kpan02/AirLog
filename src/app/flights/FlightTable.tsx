@@ -63,7 +63,7 @@ export default function FlightTable({
         return sortDir === "asc" ? cmp : -cmp;
     });
     
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <div className="flex justify-center items-center mt-12">Loading...</div>;
     if (error) return <div className="text-red-500">{error}</div>;
     
     // Common styles
