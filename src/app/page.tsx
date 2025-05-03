@@ -7,8 +7,9 @@ import { Toaster} from "sonner";
 
 import AddFlightForm from "./flights/AddFlightForm";
 import FlightTable from "./flights/FlightTable";
+import Overview from "./flights/Overview";
 import type { Flight } from "./flights/FlightTable";
-
+import { calculateStats } from "./flights/utils";
 export default function Home() {
   const [open, setOpen] = useState(false);
   const [flights, setFlights] = useState<Flight[]>([]);
@@ -39,7 +40,7 @@ export default function Home() {
   return (
     <main className="container mx-auto p-4">
       <h1 className="text-6xl font-bold text-center">AirLog</h1>
-      <p className="text-gray-500 text-center mt-2 mb-8">Track your flights</p>
+      <p className="text-gray-500 text-center mt-2 mb-5">Track your flights</p>
       <div className="h-4" />
       
       <div className="flex justify-end mb-4">
@@ -58,6 +59,8 @@ export default function Home() {
         </Dialog>
       </div>
 
+      <Overview {...calculateStats(flights)}/>
+      <h2 className="text-3xl font-bold mb-5 max-w-xl mx-auto">Flight Log</h2>
       <FlightTable 
         onAddFlight={() => setOpen(true)}
         flights={flights}

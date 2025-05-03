@@ -23,11 +23,6 @@ type AirportOption = {
     label: string;
 };
 
-type EditFlightFormProps = {
-    onSuccess?: () => void;
-    flight: Flight | null;
-};
-
 export default function FlightTable({ 
   onAddFlight,
   flights,
@@ -216,7 +211,7 @@ export default function FlightTable({
             </div>
             
             {/* Flight Cards */}
-            <div className="space-y-4 border-gray-300 p-0">
+            <div className="space-y-4 border-gray-300 p-0 font-mono">
                 {filteredFlights.map((flight) => {
                     const dep = findAirportByCode(flight.departureAirport);
                     const arr = findAirportByCode(flight.arrivalAirport);
@@ -233,7 +228,7 @@ export default function FlightTable({
                             <div className="flex items-center gap-4">
                                 <span className="text-3xl">✈️</span>
                                 <div>
-                                    <div className="flex items-center gap-2 text-lg font-bold">
+                                    <div className="flex items-center gap-2 text-2xl font-bold">
                                         <span>{flight.departureAirport}</span>
                                         <span>🠪</span>
                                         <span>{flight.arrivalAirport}</span>

@@ -35,3 +35,8 @@ export function calculateDistance(a1: Airport, a2: Airport): number {
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     return Math.round(earthRadius * c * 100) / 100;
 }
+
+export function getCountry(code: string): string {
+    const airport = findAirportByCode(code);
+    return airport?.iso_country || "Unknown";
+}
