@@ -1,7 +1,7 @@
 //src/app/flights/FlightTable.tsx
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { findAirportByCode, searchAirports } from "@/lib/airports";
 import { Button } from "@/components/ui/button";
 import { Autocomplete, TextField, MenuItem } from "@mui/material";
@@ -28,10 +28,20 @@ type EditFlightFormProps = {
     flight: Flight | null;
 };
 
-export default function FlightTable({ onAddFlight }: { onAddFlight: () => void }) {
-    // State management
-    const [flights, setFlights] = useState<Flight[]>([]);
-    const [loading, setLoading] = useState(true);
+export default function FlightTable({ 
+  onAddFlight,
+  flights,
+  loading,
+  error,
+  fetchFlights
+}: { 
+  onAddFlight: () => void;
+  flights: Flight[];
+  loading: boolean;
+  error: string | null;
+  fetchFlights: () => Promise<void>;
+}) {
+    // Remove local state for flights, loading, error
     const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
     const [year, setYear] = useState<string | null>(null);
     const [from, setFrom] = useState<string | null>(null);
@@ -41,19 +51,6 @@ export default function FlightTable({ onAddFlight }: { onAddFlight: () => void }
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [selectedFlight, setSelectedFlight] = useState<Flight | null>(null);
 
-    
-    // Fetch flights data
-    useEffect(() => {
-        async function fetchFlights() {
-            setLoading(true);
-            const res = await fetch("/api/flights");
-            const data = await res.json();
-            setFlights(data.data || []);
-            setLoading(false);
-        }
-        fetchFlights();
-    }, []);
-    
     // Get unique years from flights
     const years = Array.from(
         new Set(flights.map(f => new Date(f.date).getFullYear().toString()))
@@ -72,6 +69,7 @@ export default function FlightTable({ onAddFlight }: { onAddFlight: () => void }
     });
     
     if (loading) return <div>Loading...</div>;
+    if (error) return <div className="text-red-500">{error}</div>;
     
     // Common styles
     const commonTextFieldStyles = {
@@ -266,7 +264,10 @@ export default function FlightTable({ onAddFlight }: { onAddFlight: () => void }
                         </DialogHeader>
                         <EditFlightForm
                             flight={selectedFlight}
-                            onSuccess={() => setEditModalOpen(false)}
+                            onSuccess={() => {
+                                fetchFlights();
+                                setEditModalOpen(false);
+                            }}
                         />
                     </DialogContent>
                 </Dialog>
