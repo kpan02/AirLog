@@ -68,9 +68,9 @@ const Overview: React.FC<OverviewProps> = ({
                     <div className="text-xs opacity-60">{mostVisitedAirport?.count ? `${mostVisitedAirport.count} times` : ""}</div>
                 </div>
                 {/* Top Routes */}
-                <div className="col-span-4 pl-3">
+                <div className="col-span-4 pl-5">
                     <div className="uppercase text-xs opacity-90">Top Route</div>
-                    <div className="text-2xl font-bold">{topRoute.from ? `${topRoute.from} → ${topRoute.to}` : "-"}</div>
+                    <div className="text-2xl font-bold">{topRoute.from ? `${topRoute.from}-${topRoute.to}` : "-"}</div>
                     <div className="text-xs opacity-60">{topRoute.count ? `${topRoute.count} times` : ""}</div>
                 </div>
                 {/* Longest Flight */}

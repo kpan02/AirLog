@@ -71,7 +71,7 @@ export const airports: Airport[] = [
     "latitude_deg": 30.322478,
     "longitude_deg": -9.412003,
     "iso_country": "MA",
-    "municipality": "Agadir (Temsia)",
+    "municipality": "Agadir",
     "iata_code": "AGA"
   },
   {
@@ -187,7 +187,7 @@ export const airports: Airport[] = [
     "iata_code": "AUS"
   },
   {
-    "name": "Baghdad International Airport / New Al Muthana Air Base",
+    "name": "Baghdad International Airport",
     "latitude_deg": 33.262501,
     "longitude_deg": 44.2346,
     "iso_country": "IQ",
@@ -527,7 +527,7 @@ export const airports: Airport[] = [
     "latitude_deg": 28.189199,
     "longitude_deg": 113.220001,
     "iso_country": "CN",
-    "municipality": "Changsha (Changsha)",
+    "municipality": "Changsha",
     "iata_code": "CSX"
   },
   {
@@ -535,7 +535,7 @@ export const airports: Airport[] = [
     "latitude_deg": 49.012798,
     "longitude_deg": 2.55,
     "iso_country": "FR",
-    "municipality": "Paris (Roissy-en-France, Val-d'Oise)",
+    "municipality": "Paris",
     "iata_code": "CDG"
   },
   {
@@ -551,7 +551,7 @@ export const airports: Airport[] = [
     "latitude_deg": 30.558257,
     "longitude_deg": 103.945966,
     "iso_country": "CN",
-    "municipality": "Chengdu (Shuangliu)",
+    "municipality": "Chengdu",
     "iata_code": "CTU"
   },
   {
@@ -559,7 +559,7 @@ export const airports: Airport[] = [
     "latitude_deg": 30.31252,
     "longitude_deg": 104.441284,
     "iso_country": "CN",
-    "municipality": "Chengdu (Jianyang)",
+    "municipality": "Chengdu",
     "iata_code": "TFU"
   },
   {
@@ -631,7 +631,7 @@ export const airports: Airport[] = [
     "latitude_deg": 39.048801,
     "longitude_deg": -84.667801,
     "iso_country": "US",
-    "municipality": "Cincinnati / Covington",
+    "municipality": "Cincinnati",
     "iata_code": "CVG"
   },
   {
@@ -655,7 +655,7 @@ export const airports: Airport[] = [
     "latitude_deg": 50.865898,
     "longitude_deg": 7.14274,
     "iso_country": "DE",
-    "municipality": "Köln (Cologne)",
+    "municipality": "Cologne",
     "iata_code": "CGN"
   },
   {
@@ -711,7 +711,7 @@ export const airports: Airport[] = [
     "latitude_deg": 38.965719,
     "longitude_deg": 121.538477,
     "iso_country": "CN",
-    "municipality": "Dalian (Ganjingzi)",
+    "municipality": "Dalian",
     "iata_code": "DLC"
   },
   {
@@ -719,7 +719,7 @@ export const airports: Airport[] = [
     "latitude_deg": 32.896801,
     "longitude_deg": -97.038002,
     "iso_country": "US",
-    "municipality": "Dallas-Fort Worth",
+    "municipality": "Dallas",
     "iata_code": "DFW"
   },
   {
@@ -735,7 +735,7 @@ export const airports: Airport[] = [
     "latitude_deg": 21.32062,
     "longitude_deg": -157.924228,
     "iso_country": "US",
-    "municipality": "Honolulu, Oahu",
+    "municipality": "Honolulu",
     "iata_code": "HNL"
   },
   {
@@ -751,7 +751,7 @@ export const airports: Airport[] = [
     "latitude_deg": -8.748409,
     "longitude_deg": 115.167123,
     "iso_country": "ID",
-    "municipality": "Kuta, Badung",
+    "municipality": "Kuta",
     "iata_code": "DPS"
   },
   {
@@ -991,7 +991,7 @@ export const airports: Airport[] = [
     "latitude_deg": 43.808558,
     "longitude_deg": 11.202822,
     "iso_country": "IT",
-    "municipality": "Firenze (FI)",
+    "municipality": "Firenze",
     "iata_code": "FLR"
   },
   {
@@ -1047,7 +1047,7 @@ export const airports: Airport[] = [
     "latitude_deg": 25.934669,
     "longitude_deg": 119.66318,
     "iso_country": "CN",
-    "municipality": "Fuzhou (Changle)",
+    "municipality": "Fuzhou",
     "iata_code": "FOC"
   },
   {
@@ -1135,7 +1135,7 @@ export const airports: Airport[] = [
     "latitude_deg": 44.412039,
     "longitude_deg": 8.840732,
     "iso_country": "IT",
-    "municipality": "Genova (GE)",
+    "municipality": "Genova",
     "iata_code": "GOA"
   },
   {
@@ -1215,7 +1215,7 @@ export const airports: Airport[] = [
     "latitude_deg": 23.392401,
     "longitude_deg": 113.299004,
     "iso_country": "CN",
-    "municipality": "Guangzhou (Huadu)",
+    "municipality": "Guangzhou",
     "iata_code": "CAN"
   },
   {
@@ -1239,7 +1239,7 @@ export const airports: Airport[] = [
     "latitude_deg": 25.219828,
     "longitude_deg": 110.039553,
     "iso_country": "CN",
-    "municipality": "Guilin (Lingui)",
+    "municipality": "Guilin",
     "iata_code": "KWL"
   },
   {
@@ -1247,7 +1247,7 @@ export const airports: Airport[] = [
     "latitude_deg": 26.541466,
     "longitude_deg": 106.803331,
     "iso_country": "CN",
-    "municipality": "Guiyang (Nanming)",
+    "municipality": "Guiyang",
     "iata_code": "KWE"
   },
   {
@@ -1255,7 +1255,7 @@ export const airports: Airport[] = [
     "latitude_deg": 19.9349,
     "longitude_deg": 110.459,
     "iso_country": "CN",
-    "municipality": "Haikou (Meilan)",
+    "municipality": "Haikou",
     "iata_code": "HAK"
   },
   {
@@ -1351,7 +1351,7 @@ export const airports: Airport[] = [
     "latitude_deg": 60.318363,
     "longitude_deg": 24.963341,
     "iso_country": "FI",
-    "municipality": "Helsinki (Vantaa)",
+    "municipality": "Helsinki",
     "iata_code": "HEL"
   },
   {
@@ -1439,7 +1439,7 @@ export const airports: Airport[] = [
     "latitude_deg": 38.872898,
     "longitude_deg": 1.37312,
     "iso_country": "ES",
-    "municipality": "Ibiza (Eivissa)",
+    "municipality": "Ibiza",
     "iata_code": "IBZ"
   },
   {
@@ -1487,7 +1487,7 @@ export const airports: Airport[] = [
     "latitude_deg": 40.898602,
     "longitude_deg": 29.3092,
     "iso_country": "TR",
-    "municipality": "Pendik, Istanbul",
+    "municipality": "Istanbul",
     "iata_code": "SAW"
   },
   {
@@ -1519,7 +1519,7 @@ export const airports: Airport[] = [
     "latitude_deg": 36.857201,
     "longitude_deg": 117.216003,
     "iso_country": "CN",
-    "municipality": "Jinan (Licheng)",
+    "municipality": "Jinan",
     "iata_code": "TNA"
   },
   {
@@ -1639,7 +1639,7 @@ export const airports: Airport[] = [
     "latitude_deg": 9.99386,
     "longitude_deg": -84.208801,
     "iso_country": "CR",
-    "municipality": "San José (Alajuela)",
+    "municipality": "San José",
     "iata_code": "SJO"
   },
   {
@@ -1711,7 +1711,7 @@ export const airports: Airport[] = [
     "latitude_deg": 22.577101,
     "longitude_deg": 120.349998,
     "iso_country": "TW",
-    "municipality": "Kaohsiung (Xiaogang)",
+    "municipality": "Kaohsiung",
     "iata_code": "KHH"
   },
   {
@@ -1903,7 +1903,7 @@ export const airports: Airport[] = [
     "latitude_deg": 36.515202,
     "longitude_deg": 103.620003,
     "iso_country": "CN",
-    "municipality": "Lanzhou (Yongdeng)",
+    "municipality": "Lanzhou",
     "iata_code": "LHW"
   },
   {
@@ -1999,7 +1999,7 @@ export const airports: Airport[] = [
     "latitude_deg": 51.874699,
     "longitude_deg": -0.368333,
     "iso_country": "GB",
-    "municipality": "Luton, Bedfordshire",
+    "municipality": "Luton",
     "iata_code": "LTN"
   },
   {
@@ -2055,7 +2055,7 @@ export const airports: Airport[] = [
     "latitude_deg": 8.61644,
     "longitude_deg": -13.1955,
     "iso_country": "SL",
-    "municipality": "Freetown (Lungi-Town)",
+    "municipality": "Freetown",
     "iata_code": "FNA"
   },
   {
@@ -2087,7 +2087,7 @@ export const airports: Airport[] = [
     "latitude_deg": 45.725996,
     "longitude_deg": 5.090139,
     "iso_country": "FR",
-    "municipality": "Colombier-Saugnieu, Rhône",
+    "municipality": "Colombier-Saugnieu",
     "iata_code": "LYS"
   },
   {
@@ -2111,7 +2111,7 @@ export const airports: Airport[] = [
     "latitude_deg": 22.149599,
     "longitude_deg": 113.592003,
     "iso_country": "MO",
-    "municipality": "Nossa Senhora do Carmo",
+    "municipality": "Macau",
     "iata_code": "MFM"
   },
   {
@@ -2167,7 +2167,7 @@ export const airports: Airport[] = [
     "latitude_deg": 53.349375,
     "longitude_deg": -2.279521,
     "iso_country": "GB",
-    "municipality": "Manchester, Greater Manchester",
+    "municipality": "Manchester",
     "iata_code": "MAN"
   },
   {
@@ -2215,7 +2215,7 @@ export const airports: Airport[] = [
     "latitude_deg": 43.438088,
     "longitude_deg": 5.2125,
     "iso_country": "FR",
-    "municipality": "Marignane, Bouches-du-Rhône",
+    "municipality": "Marignane",
     "iata_code": "MRS"
   },
   {
@@ -2287,7 +2287,7 @@ export const airports: Airport[] = [
     "latitude_deg": 45.670725,
     "longitude_deg": 9.709223,
     "iso_country": "IT",
-    "municipality": "Orio al Serio (BG)",
+    "municipality": "Orio al Serio",
     "iata_code": "BGY"
   },
   {
@@ -2295,7 +2295,7 @@ export const airports: Airport[] = [
     "latitude_deg": 45.6306,
     "longitude_deg": 8.72811,
     "iso_country": "IT",
-    "municipality": "Ferno (VA)",
+    "municipality": "Ferno",
     "iata_code": "MXP"
   },
   {
@@ -2311,11 +2311,11 @@ export const airports: Airport[] = [
     "latitude_deg": -34.8222,
     "longitude_deg": -58.5358,
     "iso_country": "AR",
-    "municipality": "Buenos Aires (Ezeiza)",
+    "municipality": "Buenos Aires",
     "iata_code": "EZE"
   },
   {
-    "name": "Minneapolis–Saint Paul International Airport / Wold–Chamberlain Field",
+    "name": "Minneapolis–Saint Paul International Airport",
     "latitude_deg": 44.880081,
     "longitude_deg": -93.221741,
     "iso_country": "US",
@@ -2367,7 +2367,7 @@ export const airports: Airport[] = [
     "latitude_deg": 13.4409,
     "longitude_deg": -89.055702,
     "iso_country": "SV",
-    "municipality": "San Salvador (San Luis Talpa)",
+    "municipality": "San Salvador",
     "iata_code": "SAL"
   },
   {
@@ -2391,7 +2391,7 @@ export const airports: Airport[] = [
     "latitude_deg": 34.991406,
     "longitude_deg": 126.382814,
     "iso_country": "KR",
-    "municipality": "Muan (Piseo-ri)",
+    "municipality": "Muan",
     "iata_code": "MWX"
   },
   {
@@ -2447,7 +2447,7 @@ export const airports: Airport[] = [
     "latitude_deg": 22.608544,
     "longitude_deg": 108.175335,
     "iso_country": "CN",
-    "municipality": "Nanning (Jiangnan)",
+    "municipality": "Nanning",
     "iata_code": "NNG"
   },
   {
@@ -2535,7 +2535,7 @@ export const airports: Airport[] = [
     "latitude_deg": 43.658401,
     "longitude_deg": 7.21587,
     "iso_country": "FR",
-    "municipality": "Nice, Alpes-Maritimes",
+    "municipality": "Nice",
     "iata_code": "NCE"
   },
   {
@@ -2551,7 +2551,7 @@ export const airports: Airport[] = [
     "latitude_deg": 14.5086,
     "longitude_deg": 121.019997,
     "iso_country": "PH",
-    "municipality": "Manila (Pasay)",
+    "municipality": "Manila",
     "iata_code": "MNL"
   },
   {
@@ -2567,7 +2567,7 @@ export const airports: Airport[] = [
     "latitude_deg": 21.221201,
     "longitude_deg": 105.806999,
     "iso_country": "VN",
-    "municipality": "Hanoi (Soc Son)",
+    "municipality": "Hanoi",
     "iata_code": "HAN"
   },
   {
@@ -2671,7 +2671,7 @@ export const airports: Airport[] = [
     "latitude_deg": 60.193901,
     "longitude_deg": 11.1004,
     "iso_country": "NO",
-    "municipality": "Oslo (Gardermoen)",
+    "municipality": "Oslo",
     "iata_code": "OSL"
   },
   {
@@ -2711,7 +2711,7 @@ export const airports: Airport[] = [
     "latitude_deg": 48.72333,
     "longitude_deg": 2.37944,
     "iso_country": "FR",
-    "municipality": "Paris (Orly, Val-de-Marne)",
+    "municipality": "Paris",
     "iata_code": "ORY"
   },
   {
@@ -2743,7 +2743,7 @@ export const airports: Airport[] = [
     "latitude_deg": 11.5466,
     "longitude_deg": 104.844002,
     "iso_country": "KH",
-    "municipality": "Phnom Penh (Pou Senchey)",
+    "municipality": "Phnom Penh",
     "iata_code": "PNH"
   },
   {
@@ -2775,7 +2775,7 @@ export const airports: Airport[] = [
     "latitude_deg": 43.683899,
     "longitude_deg": 10.3927,
     "iso_country": "IT",
-    "municipality": "Pisa (PI)",
+    "municipality": "Pisa",
     "iata_code": "PSA"
   },
   {
@@ -2795,7 +2795,7 @@ export const airports: Airport[] = [
     "iata_code": "ROV"
   },
   {
-    "name": "Podgorica Airport / Podgorica Golubovci Airbase",
+    "name": "Podgorica Airport",
     "latitude_deg": 42.359402,
     "longitude_deg": 19.2519,
     "iso_country": "ME",
@@ -2903,7 +2903,7 @@ export const airports: Airport[] = [
     "latitude_deg": 36.361953,
     "longitude_deg": 120.088171,
     "iso_country": "CN",
-    "municipality": "Qingdao (Jiaozhou)",
+    "municipality": "Qingdao",
     "iata_code": "TAO"
   },
   {
@@ -3119,7 +3119,7 @@ export const airports: Airport[] = [
     "latitude_deg": 18.3029,
     "longitude_deg": 109.412003,
     "iso_country": "CN",
-    "municipality": "Sanya (Tianya)",
+    "municipality": "Sanya",
     "iata_code": "SYX"
   },
   {
@@ -3175,7 +3175,7 @@ export const airports: Airport[] = [
     "latitude_deg": 31.198104,
     "longitude_deg": 121.33426,
     "iso_country": "CN",
-    "municipality": "Shanghai (Minhang)",
+    "municipality": "Shanghai",
     "iata_code": "SHA"
   },
   {
@@ -3183,7 +3183,7 @@ export const airports: Airport[] = [
     "latitude_deg": 31.1434,
     "longitude_deg": 121.805,
     "iso_country": "CN",
-    "municipality": "Shanghai (Pudong)",
+    "municipality": "Shanghai",
     "iata_code": "PVG"
   },
   {
@@ -3223,7 +3223,7 @@ export const airports: Airport[] = [
     "latitude_deg": 22.639299,
     "longitude_deg": 113.810997,
     "iso_country": "CN",
-    "municipality": "Shenzhen (Bao'an)",
+    "municipality": "Shenzhen",
     "iata_code": "SZX"
   },
   {
@@ -3391,7 +3391,7 @@ export const airports: Airport[] = [
     "latitude_deg": -33.946098,
     "longitude_deg": 151.177002,
     "iso_country": "AU",
-    "municipality": "Sydney (Mascot)",
+    "municipality": "Sydney",
     "iata_code": "SYD"
   },
   {
@@ -3607,7 +3607,7 @@ export const airports: Airport[] = [
     "latitude_deg": 45.200802,
     "longitude_deg": 7.64963,
     "iso_country": "IT",
-    "municipality": "Caselle Torinese (TO)",
+    "municipality": "Caselle Torinese",
     "iata_code": "TRN"
   },
   {
@@ -3623,7 +3623,7 @@ export const airports: Airport[] = [
     "latitude_deg": 47.646916,
     "longitude_deg": 106.819833,
     "iso_country": "MN",
-    "municipality": "Ulaanbaatar (Sergelen)",
+    "municipality": "Ulaanbaatar",
     "iata_code": "UBN"
   },
   {
@@ -3663,7 +3663,7 @@ export const airports: Airport[] = [
     "latitude_deg": 45.505299,
     "longitude_deg": 12.3519,
     "iso_country": "IT",
-    "municipality": "Venezia (VE)",
+    "municipality": "Venezia",
     "iata_code": "VCE"
   },
   {
@@ -3671,7 +3671,7 @@ export const airports: Airport[] = [
     "latitude_deg": 45.394955,
     "longitude_deg": 10.887303,
     "iso_country": "IT",
-    "municipality": "Caselle (VR)",
+    "municipality": "Caselle",
     "iata_code": "VRN"
   },
   {
@@ -3743,7 +3743,7 @@ export const airports: Airport[] = [
     "latitude_deg": 27.910572,
     "longitude_deg": 120.853465,
     "iso_country": "CN",
-    "municipality": "Wenzhou (Longwan)",
+    "municipality": "Wenzhou",
     "iata_code": "WNZ"
   },
   {
@@ -3767,7 +3767,7 @@ export const airports: Airport[] = [
     "latitude_deg": 30.774798,
     "longitude_deg": 114.213723,
     "iso_country": "CN",
-    "municipality": "Wuhan (Huangpi)",
+    "municipality": "Wuhan",
     "iata_code": "WUH"
   },
   {
@@ -3783,7 +3783,7 @@ export const airports: Airport[] = [
     "latitude_deg": 34.447102,
     "longitude_deg": 108.751999,
     "iso_country": "CN",
-    "municipality": "Xianyang (Weicheng)",
+    "municipality": "Xianyang",
     "iata_code": "XIY"
   },
   {

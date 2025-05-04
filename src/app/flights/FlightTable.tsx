@@ -112,7 +112,7 @@ export default function FlightTable({
                     onMouseOver={e => (e.currentTarget.style.borderColor = "#d1d5db")}
                     onMouseOut={e => (e.currentTarget.style.borderColor = "#e5e7eb")}
                 >
-                    Date {sortDir === "asc" ? "🡑" : "🡓"}
+                    Date {sortDir === "asc" ? "↑" : "↓"}
                 </button>
                 
                 {/* 2. Year Filter */}
@@ -229,7 +229,7 @@ export default function FlightTable({
                                 <div>
                                     <div className="flex items-center gap-2 text-2xl font-bold">
                                         <span>{flight.departureAirport}</span>
-                                        <span>🠪</span>
+                                        <span>→</span>
                                         <span>{flight.arrivalAirport}</span>
                                     </div>
                                     <div className="text-gray-500 text-sm">

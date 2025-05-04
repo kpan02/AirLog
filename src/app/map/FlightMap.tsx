@@ -1,10 +1,11 @@
 "use client";
 
-import { MapContainer, TileLayer, LayersControl, Polyline, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, LayersControl, Polyline, Popup, CircleMarker } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import type { Flight } from "../flights/FlightTable";
 import { findAirportByCode } from "@/lib/airports";
 import { useState } from "react";
+import React from "react";
 
 export default function FlightMap({ flights }: { flights: Flight[] }) {
   const [activeBaseLayer, setActiveBaseLayer] = useState<"Satellite" | "Street">("Satellite");
@@ -50,28 +51,50 @@ export default function FlightMap({ flights }: { flights: Flight[] }) {
           if (!origin || !destination) return null;
 
           return (
-            <Polyline
-              key={idx}
-              positions={[
-                [origin.latitude_deg, origin.longitude_deg],
-                [destination.latitude_deg, destination.longitude_deg]
-              ]}
-              pathOptions={{
-                color: activeBaseLayer === "Satellite" ? "white" : "#2272c7",
-                weight: 2,
-                opacity: 1
-              }}
-            >
-              <Popup>
-                <div style={{ fontSize: 12 }}>
-                  <strong>
-                    {flight.departureAirport} → {flight.arrivalAirport}
-                  </strong>
-                  <br />
-                  {flight.date && <span>{new Date(flight.date).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}</span>}
-                </div>
-              </Popup>
-            </Polyline>
+            <React.Fragment key={idx}>
+              {/* Dots for airports */}
+              <CircleMarker
+                center={[origin.latitude_deg, origin.longitude_deg]}
+                radius={3}
+                pathOptions={{
+                  fillColor: activeBaseLayer === "Satellite" ? "white" : "#2272c7",
+                  fillOpacity: 1,
+                  weight: 0,
+                }}
+              />
+              <CircleMarker
+                center={[destination.latitude_deg, destination.longitude_deg]}
+                radius={3}
+                pathOptions={{
+                  fillColor: activeBaseLayer === "Satellite" ? "white" : "#2272c7",
+                  fillOpacity: 1,
+                  weight: 0,
+                }}
+              />
+
+              {/* Polyline for the flight path */}
+              <Polyline
+                positions={[
+                  [origin.latitude_deg, origin.longitude_deg],
+                  [destination.latitude_deg, destination.longitude_deg]
+                ]}
+                pathOptions={{
+                  color: activeBaseLayer === "Satellite" ? "white" : "#2272c7",
+                  weight: 2,
+                  opacity: 1
+                }}
+              >
+                <Popup>
+                  <div style={{ fontSize: 12 }}>
+                    <strong>
+                      {flight.departureAirport} → {flight.arrivalAirport}
+                    </strong>
+                    <br />
+                    {flight.date && <span>{new Date(flight.date).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })}</span>}
+                  </div>
+                </Popup>
+              </Polyline>
+            </React.Fragment>
           );
         })}
       </MapContainer>

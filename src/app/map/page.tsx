@@ -87,7 +87,7 @@ export default function MapPage() {
 
                 <div className="flex justify-center mt-3">
                     <Link href="/" className="text-blue-600 hover:underline mb-6 inline-block font-mono">
-                        🡨 Return to Flight Log
+                        ← Return to Flight Log
                     </Link>
                 </div>
 
