@@ -3,6 +3,7 @@ import { db } from '@/db';
 import { flights } from '@/db/schema';
 import { auth } from '@clerk/nextjs/server';
 import { NextResponse } from 'next/server';
+import { eq } from 'drizzle-orm';
 
 type InsertFlight = typeof flights.$inferInsert;
 
@@ -14,8 +15,8 @@ export async function GET() {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const testQuery = await db.select().from(flights);
-    return NextResponse.json({ success: true, data: testQuery });
+    const userFlights = await db.select().from(flights).where(eq(flights.userId, userId));
+    return NextResponse.json({ success: true, data: userFlights });
   } catch (err) {
     const error = err as Error;
     console.error('Detailed error:', {
