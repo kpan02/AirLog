@@ -10,9 +10,9 @@ type InsertFlight = typeof flights.$inferInsert;
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } }
 ) {
-  const id = Number(params.id);
+  const id = Number(context.params.id);
 
   try {
     const { userId } = await auth();
@@ -58,9 +58,9 @@ export async function PATCH(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: { id: string } } 
 ) {
-  const id = Number(params.id);
+  const id = Number(context.params.id); 
 
   try {
     const { userId } = await auth();
