@@ -211,23 +211,23 @@ export default function FlightTable({
                             }}
                         >
                             <div className="flex items-center gap-4">
-                                <span className="text-3xl">✈️</span>
+                                <span className="text-xl md:text-3xl">✈️</span>
                                 <div>
-                                    <div className="flex items-center gap-2 text-2xl font-bold">
+                                    <div className="flex items-center gap-2 text-base md:text-2xl font-bold">
                                         <span>{flight.departureAirport}</span>
                                         <span>→</span>
                                         <span>{flight.arrivalAirport}</span>
                                     </div>
-                                    <div className="text-gray-500 text-sm">
+                                    <div className="text-gray-500 text-[9px] md:text-sm">
                                         {dep && arr ? `${dep.municipality} to ${arr.municipality}` : ""}
                                     </div>
                                 </div>
                             </div>
                             <div className="flex flex-col items-end">
-                                <div className="font-bold text-lg">
+                                <div className="font-bold text-sm md:text-lg">
                                     {dayjs(flight.date).format("MMM DD, YYYY")}
                                 </div>
-                                <div className="text-gray-500 text-sm">
+                                <div className="text-gray-500 text-[9px] md:text-sm">
                                     {flight.flightNumber ? `${flight.flightNumber}` : ""}
                                 </div>
                             </div>
