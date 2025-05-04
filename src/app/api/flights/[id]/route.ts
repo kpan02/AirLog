@@ -1,4 +1,5 @@
 // src/app/api/flights/[id]/route.ts
+
 import { db } from '@/db';
 import { flights } from '@/db/schema';
 import { auth } from '@clerk/nextjs/server';
@@ -9,9 +10,8 @@ type InsertFlight = typeof flights.$inferInsert;
 
 export async function PATCH(
   request: Request,
-  context: { params: { id: string } }
+  { params }: { params: { id: string } }
 ) {
-  const { params } = context;
   const id = Number(params.id);
 
   try {
@@ -58,9 +58,8 @@ export async function PATCH(
 
 export async function DELETE(
   request: Request,
-  context: { params: { id: string } }
+  { params }: { params: { id: string } }
 ) {
-  const { params } = context;
   const id = Number(params.id);
 
   try {
