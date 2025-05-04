@@ -90,27 +90,13 @@ export default function FlightTable({
     return (
         <div className="max-w-xl mx-auto">
             {/* Top Bar */}
-            <div className="flex flex-wrap items-center gap-2 mb-4 px-0 py-0">
+            <div className="flex flex-col md:flex-row md:flex-wrap md:items-center gap-2 md:gap-2 mb-4 px-0 py-0">
                 {/* 1. Date Sort */}
                 <button
                     type="button"
                     onClick={() => setSortDir(dir => (dir === "asc" ? "desc" : "asc"))}
-                    style={{
-                        width: 70,
-                        height: 40,
-                        background: "#f3f4f6",
-                        color: "black",
-                        border: "1px solid #e5e7eb",
-                        borderRadius: 4,
-                        fontSize: "0.95rem",
-                        cursor: "pointer",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        transition: "border-color 0.2s",
-                    }}
-                    onMouseOver={e => (e.currentTarget.style.borderColor = "#d1d5db")}
-                    onMouseOut={e => (e.currentTarget.style.borderColor = "#e5e7eb")}
+                    className="w-full md:w-[70px] h-9 md:h-10 bg-gray-100 text-black border border-gray-200 rounded-md text-sm md:text-base flex items-center justify-center transition-colors"
+                    style={{ fontSize: '0.95rem' }}
                 >
                     Date {sortDir === "asc" ? "↑" : "↓"}
                 </button>
@@ -128,7 +114,7 @@ export default function FlightTable({
                         inputLabel: { style: { color: "black" } },
                         input: { style: { color: "black" } },
                     }}
-                    sx={commonTextFieldStyles}
+                    sx={{ ...commonTextFieldStyles, width: '100%', '@media (min-width: 768px)': { width: 100 } }}
                 >
                     <MenuItem value="">Year</MenuItem>
                     {years.map(y => (
@@ -139,7 +125,7 @@ export default function FlightTable({
                 {/* 3. From Filter */}
                 <Autocomplete
                     size="small"
-                    sx={commonAutocompleteStyles}
+                    sx={{ ...commonAutocompleteStyles, width: '100%', '@media (min-width: 768px)': { width: 100 } }}
                     options={fromOptions}
                     inputValue={from ?? ""}
                     onInputChange={(_, value) => {
@@ -171,7 +157,7 @@ export default function FlightTable({
                 {/* 4. To Filter */}
                 <Autocomplete
                     size="small"
-                    sx={commonAutocompleteStyles}
+                    sx={{ ...commonAutocompleteStyles, width: '100%', '@media (min-width: 768px)': { width: 100 } }}
                     options={toOptions}
                     inputValue={to ?? ""}
                     onInputChange={(_, value) => {
@@ -200,10 +186,10 @@ export default function FlightTable({
                     freeSolo
                 />
                 
-                {/* 5. Add Button */}
-                <Button 
-                    onClick={onAddFlight} 
-                    className="ml-auto h-9 bg-black text-white hover:bg-gray-800 cursor-pointer"
+                {/* 5. Add Flight Button */}
+                <Button
+                    onClick={onAddFlight}
+                    className="ml-auto h-9 bg-black text-white hover:bg-gray-800 cursor-pointer w-full md:w-auto mt-2 md:mt-0"
                 >
                     + Add Flight
                 </Button>
