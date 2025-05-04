@@ -4,12 +4,12 @@ import { db } from '@/db';
 import { flights } from '@/db/schema';
 import { auth } from '@clerk/nextjs/server';
 import { eq } from 'drizzle-orm';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 type InsertFlight = typeof flights.$inferInsert;
 
 export async function PATCH(
-  request: Request,
+  request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   const id = Number(params.id);
@@ -57,7 +57,7 @@ export async function PATCH(
 }
 
 export async function DELETE(
-  request: Request,
+  request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   const id = Number(params.id);
