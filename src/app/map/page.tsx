@@ -15,12 +15,14 @@ export default function MapPage() {
     const { isLoaded, isSignedIn } = useUser();
     const [flights, setFlights] = useState<Flight[]>([]);
     const [selectedYear, setSelectedYear] = useState<"all" | number>("all");
+    const [error, setError] = useState<string | null>(null);
 
     async function fetchFlights() {
         try {
             const res = await fetch("/api/flights");
             if (!res.ok) {
                 if (res.status === 401) {
+                    setError("Please sign in to view your flights");
                     return;
                 }
                 throw new Error("Failed to fetch flights");
@@ -28,16 +30,36 @@ export default function MapPage() {
             const data = await res.json();
             setFlights(data.data || []);
         } catch {
+            setError("Failed to load flights. Please try again.");
             setFlights([]);
         }
     }
 
     useEffect(() => {
-        fetchFlights();
-    }, []);
+        if (isSignedIn) {
+            fetchFlights();
+        }
+    }, [isSignedIn]);
 
     if (!isLoaded) {
         return <div className="flex justify-center items-center h-screen">Loading...</div>;
+    }
+
+    if (!isSignedIn) {
+        return <SignInPopup />;
+    }
+
+    if (error) {
+        return (
+            <div className="flex justify-center items-center h-screen">
+                <div className="text-center">
+                    <p className="text-red-500 mb-4">{error}</p>
+                    <Link href="/" className="text-blue-600 hover:underline">
+                        Return to Home
+                    </Link>
+                </div>
+            </div>
+        );
     }
 
     const years = Array.from(

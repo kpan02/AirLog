@@ -15,7 +15,7 @@ import { calculateStats } from "./flights/utils";
 import SignInPopup from "@/components/SignInPopup";
 
 export default function Home() {
-  const { isLoaded, isSignedIn } = useUser();
+  const { isLoaded, isSignedIn } = useUser(); // eslint-disable-line @typescript-eslint/no-unused-vars
   const [open, setOpen] = useState(false);
   const [flights, setFlights] = useState<Flight[]>([]);
   const [loading, setLoading] = useState(true);
