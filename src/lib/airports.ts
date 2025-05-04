@@ -37,8 +37,6 @@ export function calculateDistance(a1: Airport, a2: Airport): number {
 }
 
 export function getCountry(code: string): string {
-    console.log("getCountry", code);
     const airport = findAirportByCode(code);
-    console.log("airport", airport);
     return airport?.iso_country || "Unknown";
 }

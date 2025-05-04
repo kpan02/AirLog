@@ -40,7 +40,7 @@ export default function Home() {
   return (
     <main className="container mx-auto p-4">
       <img src="/airlog-logo.png" alt="AirLog" className="h-17 mx-auto" />
-      <p className="text-gray-500 text-center mt-2 mb-5 font-mono opacity-80">Track your flights</p>
+      <p className="text-gray-500 text-center mt-2 font-mono opacity-80">Track your flights</p>
       <div className="h-4" />
       
       <div className="flex justify-end mb-4">
@@ -62,7 +62,7 @@ export default function Home() {
       {/* Travel Overview Card */}
       <Overview {...calculateStats(flights)}/>
 
-      <h2 className="text-3xl font-bold mb-5 max-w-xl mx-auto">Flight Log</h2>
+      <h2 className="text-3xl font-bold mb-5 mt-12 max-w-xl mx-auto">Flight Log</h2>
       <FlightTable 
         onAddFlight={() => setOpen(true)}
         flights={flights}

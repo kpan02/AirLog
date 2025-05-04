@@ -28,7 +28,7 @@ const Overview: React.FC<OverviewProps> = ({
 }) => {
     return (
         <section
-            className="rounded-2xl p-4 pt-3 pl-5 mb-15 shadow-lg max-w-xl mx-auto"
+            className="rounded-2xl p-4 pt-3 pl-5 mb-8 shadow-lg max-w-xl mx-auto"
             style={{
                 background: "linear-gradient(135deg, #2b2e4a 0%, #1e90ff 100%)",
                 color: "white",

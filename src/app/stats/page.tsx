@@ -8,89 +8,7 @@ import Overview from "../flights/Overview";
 import { calculateStats } from "../flights/utils";
 import { getCountry, findAirportByCode, calculateDistance } from "@/lib/airports";
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, LabelList } from "recharts";
-import dayjs from "dayjs";
-
-// Helper to group flights
-function getFlightsPerData(flights: Flight[], mode: "year" | "month" | "weekday") {
-    const counts: Record<string, number> = {};
-    flights.forEach(flight => {
-        const date = dayjs(flight.date);
-        let key = "";
-        if (mode === "year") key = date.format("YYYY");
-        if (mode === "month") key = date.format("MMM");
-        if (mode === "weekday") key = date.format("ddd");
-        counts[key] = (counts[key] || 0) + 1;
-    });
-
-    // For month and weekday, ensure all are present in order
-    if (mode === "month") {
-        const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-        return months.map(m => ({ label: m, value: counts[m] || 0 }));
-    }
-    if (mode === "weekday") {
-        const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
-        return days.map(d => ({ label: d, value: counts[d] || 0 }));
-    }
-    // For year, sort descending
-    return Object.entries(counts)
-        .sort((a, b) => b[0].localeCompare(a[0]))
-        .map(([label, value]) => ({ label, value }));
-}
-
-function getRouteDistances(flights: Flight[], order: "desc" | "asc" = "desc") {
-  const routeMap: Record<string, { from: string, to: string, distance: number }> = {};
-  flights.forEach(flight => {
-    const dep = findAirportByCode(flight.departureAirport);
-    const arr = findAirportByCode(flight.arrivalAirport);
-    if (!dep || !arr) return;
-    const routeKey = [flight.departureAirport, flight.arrivalAirport].sort().join("-");
-    const distance = calculateDistance(dep, arr);
-    if (!routeMap[routeKey] || distance > routeMap[routeKey].distance) {
-      routeMap[routeKey] = {
-        from: flight.departureAirport,
-        to: flight.arrivalAirport,
-        distance,
-      };
-    }
-  });
-  // Sort by distance
-  const sorted = Object.values(routeMap).sort((a, b) =>
-    order === "desc" ? b.distance - a.distance : a.distance - b.distance
-  );
-  return sorted
-    .slice(0, 10)
-    .map(route => ({
-      route: `${route.from}-${route.to}`,
-      distance: Math.round(route.distance),
-    }));
-}
-
-function getAirportVisits(flights: Flight[], order: "desc" | "asc" = "desc") {
-  const airportCounts: Record<string, number> = {};
-  flights.forEach(flight => {
-    airportCounts[flight.departureAirport] = (airportCounts[flight.departureAirport] || 0) + 1;
-    airportCounts[flight.arrivalAirport] = (airportCounts[flight.arrivalAirport] || 0) + 1;
-  });
-  const sorted = Object.entries(airportCounts)
-    .sort((a, b) => order === "desc" ? b[1] - a[1] : a[1] - b[1])
-    .slice(0, 10) // Top 10 airports
-    .map(([code, count]) => ({
-      code,
-      count,
-    }));
-  return sorted;
-}
-
-function getUniqueCountryCodes(flights: Flight[]): string[] {
-  const codes = new Set<string>();
-  flights.forEach(flight => {
-    const depCountry = getCountry(flight.departureAirport);
-    const arrCountry = getCountry(flight.arrivalAirport);
-    if (depCountry && depCountry.length === 2) codes.add(depCountry.toUpperCase());
-    if (arrCountry && arrCountry.length === 2) codes.add(arrCountry.toUpperCase());
-  });
-  return Array.from(codes);
-}
+import { getFlightsPerData, getRouteDistances, getAirportVisits, getUniqueCountryCodes } from "./statsUtils";
 
 export default function StatsPage() {
     const [flights, setFlights] = useState<Flight[]>([]);
@@ -120,12 +38,11 @@ export default function StatsPage() {
         fetchFlights();
     }, []);
 
-    // Extract years from flights
     const years = Array.from(
         new Set(flights.map(flight => new Date(flight.date).getFullYear()))
     ).sort((a, b) => b - a);
 
-    // Filter flights based on selected year
+    // Filter flights by year
     const filteredFlights =
         selectedYear === "all"
             ? flights
@@ -150,9 +67,7 @@ export default function StatsPage() {
     }).length;
 
     const flightsPerData = getFlightsPerData(filteredFlights, flightsPerMode);
-
     const routeDistances = getRouteDistances(filteredFlights, distanceSort);
-
     const airportVisits = getAirportVisits(filteredFlights, airportSort);
     const uniqueCountryCodes = getUniqueCountryCodes(filteredFlights);
 
@@ -171,30 +86,36 @@ export default function StatsPage() {
                 </div>
 
                 {/* Year Selector */}
-                <div className="flex mt-3 mb-3 gap-2 items-center">
-                    <label htmlFor="year" className="font-medium">Year:</label>
+                <div className="flex mt-3 mb-3 gap-3 items-center">
+                  <div className="relative">
                     <select
-                        id="year"
-                        className="border rounded px-2 py-1"
-                        value={selectedYear}
-                        onChange={e =>
-                            setSelectedYear(e.target.value === "all" ? "all" : Number(e.target.value))
-                        }
+                      id="year"
+                      className="appearance-none bg-white border border-gray-300 rounded-full px-3 py-1 pr-8 text-sm font-mono shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-400 transition"
+                      value={selectedYear}
+                      onChange={e =>
+                        setSelectedYear(e.target.value === 'all' ? 'all' : Number(e.target.value))
+                      }
                     >
-                        <option value="all">All Time</option>
-                        {years.map(year => (
-                            <option key={year} value={year}>{year}</option>
-                        ))}
+                      <option value="all">All Time</option>
+                      {years.map(year => (
+                        <option key={year} value={year}>{year}</option>
+                      ))}
                     </select>
+                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                      <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </div>
+                  </div>
                 </div>
 
-                {/* Overview Card (filtered by year, no actions) */}
+                {/* Overview Card*/}
                 <Overview {...calculateStats(filteredFlights)} showActions={false} />
                 
                 {/* Flights (count) Section */}
-                <section className="mb-8">
-                    <h2 className="text-2xl font-bold mb-1">Flights</h2>
-                    <div className="flex flex-col gap-1 text-md font-mono">
+                <section className="mb-8 rounded-xl border p-6 shadow-sm">
+                    <h2 className="text-2xl font-bold mb-5 text-center">Flights</h2>
+                    <div className="flex gap-4 text-md font-mono justify-between">
                         <span><span className="font-bold">{domesticCount}</span> Domestic</span>
                         <span><span className="font-bold">{internationalCount}</span> International</span>
                         <span><span className="font-bold">{longHaulCount}</span> Long-haul</span>
@@ -202,11 +123,11 @@ export default function StatsPage() {
                 </section>
 
                 {/* Flights Per Section */}
-                <section className="mb-8">
-                    <div className="flex items-center gap-4 mb-2">
+                <section className="mb-8 rounded-xl border p-6 shadow-sm">
+                    <div className="flex justify-center mb-2">
                         <h2 className="text-2xl font-bold">Flights Per</h2>
                     </div>
-                    <div className="flex items-center gap-4 mb-2">
+                    <div className="flex justify-center gap-4 mb-5">
                         {["year", "month", "weekday"].map(mode => (
                             <button
                                 key={mode}
@@ -231,9 +152,11 @@ export default function StatsPage() {
                 </section>
 
                 {/* Distance Section */}
-                <section className="mb-8">
-                    <h2 className="text-2xl font-bold mb-2">Distance</h2>
-                    <div className="flex gap-2 mb-2">
+                <section className="mb-8 rounded-xl border p-6 shadow-sm">
+                    <div className="flex justify-center mb-2">
+                        <h2 className="text-2xl font-bold">Distance</h2>
+                    </div>
+                    <div className="flex justify-center gap-2 mb-5">
                         <button
                             className={`px-3 py-1 rounded-full font-mono text-sm ${
                                 distanceSort === "desc" ? "bg-black text-white" : "bg-gray-200 text-gray-700"
@@ -280,9 +203,11 @@ export default function StatsPage() {
                 </section>
 
                 {/* Airports Section */}
-                <section className="mb-8">
-                    <h2 className="text-2xl font-bold mb-2">Airports Visited</h2>
-                    <div className="flex gap-2 mb-2">
+                <section className="mb-8 rounded-xl border p-6 shadow-sm">
+                    <div className="flex justify-center mb-2">
+                        <h2 className="text-2xl font-bold">Airports Visited</h2>
+                    </div>
+                    <div className="flex justify-center gap-2 mb-5">
                         <button
                             className={`px-3 py-1 rounded-full font-mono text-sm ${
                                 airportSort === "desc" ? "bg-black text-white" : "bg-gray-200 text-gray-700"
@@ -327,9 +252,11 @@ export default function StatsPage() {
                 </section>
 
                 {/* Countries & Territories Section */}
-                <section className="mb-8">
-                    <h2 className="text-2xl font-bold mb-2">Countries</h2>
-                    <p className="text-sm mb-5 font-mono mb-7 italic">You've visited {((uniqueCountryCodes.length / 195) * 100).toFixed(1)}% of the world's countries!</p>
+                <section className="mb-8 rounded-xl border p-6 shadow-sm">
+                    <div className="flex justify-center mb-2">
+                        <h2 className="text-2xl font-bold">Countries</h2>
+                    </div>
+                    <p className="text-sm mb-5 font-mono mb-8 italic text-center">You've visited {((uniqueCountryCodes.length / 195) * 100).toFixed(1)}% of the world's countries!</p>
                     <div className="grid grid-cols-3 sm:grid-cols-4 gap-4">
                         {uniqueCountryCodes.map(code => (
                             <div key={code} className="flex flex-col items-center">
