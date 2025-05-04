@@ -1,7 +1,6 @@
 "use client";
 
-import { MapContainer, TileLayer, LayersControl, Polyline, CircleMarker, Popup } from "react-leaflet";
-import L from "leaflet";
+import { MapContainer, TileLayer, LayersControl, Polyline, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import type { Flight } from "../flights/FlightTable";
 import { findAirportByCode } from "@/lib/airports";

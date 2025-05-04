@@ -2,6 +2,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
@@ -38,8 +39,8 @@ export default function StatsPage() {
             }
             const data = await res.json();
             setFlights(data.data || []);
-        } catch (err) {
-            console.error("Error fetching flights:", err);
+        } catch {
+            console.error("Error fetching flights");
             setError("Failed to load flights. Please try again.");
             setFlights([]);
         } finally {
@@ -98,7 +99,13 @@ export default function StatsPage() {
     return (
         <main className="container mx-auto p-4">
             <div className="max-w-xl mx-auto">
-                <img src="/airlog-logo.png" alt="AirLog" className="h-17 mx-auto" />
+                <Image 
+                    src="/airlog-logo.png" 
+                    alt="AirLog" 
+                    width={220}
+                    height={68}
+                    className="h-17 mx-auto" 
+                />
 
                 <div className="flex justify-center mt-3">
                     <Link href="/" className="text-blue-600 hover:underline mb-6 inline-block font-mono">
@@ -157,7 +164,7 @@ export default function StatsPage() {
                                         ? "bg-black text-white"
                                         : "bg-gray-200 text-gray-700"
                                 }`}
-                                onClick={() => setFlightsPerMode(mode as any)}
+                                onClick={() => setFlightsPerMode(mode as "year" | "month" | "weekday")}
                             >
                                 {mode.charAt(0).toUpperCase() + mode.slice(1)}
                             </button>
@@ -277,11 +284,13 @@ export default function StatsPage() {
                     <div className="flex justify-center mb-2">
                         <h2 className="text-2xl font-bold">Countries</h2>
                     </div>
-                    <p className="text-sm mb-5 font-mono mb-8 italic text-center">You've visited {((uniqueCountryCodes.length / 195) * 100).toFixed(1)}% of the world's countries!</p>
+                    <p className="text-sm mb-5 font-mono mb-8 italic text-center">
+                        You&apos;ve visited {((uniqueCountryCodes.length / 195) * 100).toFixed(1)}% of the world&apos;s countries!
+                    </p>
                     <div className="grid grid-cols-3 sm:grid-cols-4 gap-4">
                         {uniqueCountryCodes.map(code => (
                             <div key={code} className="flex flex-col items-center">
-                                <img
+                                <Image
                                     src={`https://flagcdn.com/48x36/${code.toLowerCase()}.png`}
                                     alt={code}
                                     width={32}

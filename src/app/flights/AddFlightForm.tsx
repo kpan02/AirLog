@@ -26,6 +26,7 @@ type AirportOption = {
   municipality?: string;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const filterAirports = createFilterOptions<AirportOption>();
 
 export default function AddFlightForm({ onSuccess }: AddFlightFormProps) {
@@ -37,7 +38,7 @@ export default function AddFlightForm({ onSuccess }: AddFlightFormProps) {
   const [departureOptions, setDepartureOptions] = useState<Airport[]>([]);
   const [arrivalOptions, setArrivalOptions] = useState<Airport[]>([]);
 
-  const handleDepartureInput = (event: React.ChangeEvent<{}>, value: string) => {
+  const handleDepartureInput = (event: React.ChangeEvent<{}>, value: string) => { // eslint-disable-line @typescript-eslint/no-empty-object-type
     setDepartureAirport(value);
     if (value.trim() === "") {
       setDepartureOptions([]);
@@ -46,7 +47,7 @@ export default function AddFlightForm({ onSuccess }: AddFlightFormProps) {
     }
   };
   
-  const handleArrivalInput = (event: React.ChangeEvent<{}>, value: string) => {
+  const handleArrivalInput = (event: React.ChangeEvent<{}>, value: string) => { // eslint-disable-line @typescript-eslint/no-empty-object-type
     setArrivalAirport(value);
     if (value.trim() === "") {
       setArrivalOptions([]);

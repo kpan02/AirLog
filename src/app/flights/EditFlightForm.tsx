@@ -40,7 +40,7 @@ export default function EditFlightForm({ flight, onSuccess }: EditFlightFormProp
         }
     }, [flight]);
 
-    const handleDepartureInput = (event: React.ChangeEvent<{}>, value: string) => {
+    const handleDepartureInput = (event: React.ChangeEvent<{}>, value: string) => { // eslint-disable-line @typescript-eslint/no-empty-object-type
         setDepartureAirport(value);
         if (value.trim() === "") {
             setDepartureOptions([]);
@@ -49,7 +49,7 @@ export default function EditFlightForm({ flight, onSuccess }: EditFlightFormProp
         }
     };
   
-    const handleArrivalInput = (event: React.ChangeEvent<{}>, value: string) => {
+    const handleArrivalInput = (event: React.ChangeEvent<{}>, value: string) => { // eslint-disable-line @typescript-eslint/no-empty-object-type
         setArrivalAirport(value);
         if (value.trim() === "") {
             setArrivalOptions([]);

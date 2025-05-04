@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import { Toaster} from "sonner";
 import { useUser } from "@clerk/nextjs";
+import Image from "next/image";
 
 import AddFlightForm from "./flights/AddFlightForm";
 import FlightTable from "./flights/FlightTable";
@@ -57,7 +58,13 @@ export default function Home() {
 
   return (
     <main className="container mx-auto p-4">
-      <img src="/airlog-logo.png" alt="AirLog" className="h-17 mx-auto" />
+      <Image 
+        src="/airlog-logo.png" 
+        alt="AirLog" 
+        width={220}
+        height={68}
+        className="h-17 mx-auto" 
+      />
       <p className="text-gray-500 text-center mt-2 font-mono opacity-80">Track your flights</p>
       <div className="h-4" />
       

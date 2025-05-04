@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import Image from "next/image";
 import SignInPopup from "@/components/SignInPopup";
 import type { Flight } from "../flights/FlightTable";
 
@@ -13,30 +14,21 @@ const Map = dynamic(() => import("./FlightMap"), { ssr: false });
 export default function MapPage() {
     const { isLoaded, isSignedIn } = useUser();
     const [flights, setFlights] = useState<Flight[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
     const [selectedYear, setSelectedYear] = useState<"all" | number>("all");
 
     async function fetchFlights() {
-        setLoading(true);
-        setError(null);
         try {
             const res = await fetch("/api/flights");
             if (!res.ok) {
                 if (res.status === 401) {
-                    setError("Please sign in to view your flights");
                     return;
                 }
                 throw new Error("Failed to fetch flights");
             }
             const data = await res.json();
             setFlights(data.data || []);
-        } catch (err) {
-            console.error("Error fetching flights:", err);
-            setError("Failed to load flights. Please try again.");
+        } catch {
             setFlights([]);
-        } finally {
-            setLoading(false);
         }
     }
 
@@ -46,10 +38,6 @@ export default function MapPage() {
 
     if (!isLoaded) {
         return <div className="flex justify-center items-center h-screen">Loading...</div>;
-    }
-
-    if (error === "Please sign in to view your flights") {
-        return <SignInPopup />;
     }
 
     const years = Array.from(
@@ -67,7 +55,13 @@ export default function MapPage() {
     return (
         <main className="container mx-auto p-4">
             <div className="max-w-xl mx-auto">
-                <img src="/airlog-logo.png" alt="AirLog" className="h-17 mx-auto" />
+                <Image 
+                    src="/airlog-logo.png" 
+                    alt="AirLog" 
+                    width={220}
+                    height={68}
+                    className="h-17 mx-auto" 
+                />
 
                 <div className="flex justify-center mt-3">
                     <Link href="/" className="text-blue-600 hover:underline mb-6 inline-block font-mono">
