@@ -15,8 +15,8 @@ import { getFlightsPerData, getRouteDistances, getAirportVisits, getUniqueCountr
 import SignInPopup from "@/components/SignInPopup";
 
 export default function StatsPage() {
-    const { isLoaded, isSignedIn } = useUser();
-    const router = useRouter();
+    const { isLoaded, isSignedIn } = useUser(); // eslint-disable-line @typescript-eslint/no-unused-vars
+    const router = useRouter(); // eslint-disable-line @typescript-eslint/no-unused-vars
     const [flights, setFlights] = useState<Flight[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
