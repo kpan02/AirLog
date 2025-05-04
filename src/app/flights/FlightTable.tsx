@@ -103,7 +103,6 @@ export default function FlightTable({
                         border: "1px solid #e5e7eb",
                         borderRadius: 4,
                         fontSize: "0.95rem",
-                        fontWeight: 500,
                         cursor: "pointer",
                         display: "flex",
                         alignItems: "center",

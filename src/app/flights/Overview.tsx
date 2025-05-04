@@ -83,7 +83,7 @@ const Overview: React.FC<OverviewProps> = ({
 
             {/* Action Buttons */}
             {showActions && (
-            <div className="flex justify-center gap-3 mt-6">
+            <div className="flex justify-center gap-3 mt-8">
                 <button
                     className={`
                         flex items-center justify-center

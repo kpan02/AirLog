@@ -80,7 +80,7 @@ export default function StatsPage() {
                 <img src="/airlog-logo.png" alt="AirLog" className="h-17 mx-auto" />
 
                 <div className="flex justify-center mt-3">
-                    <Link href="/" className="text-blue-600 hover:underline mb-6 inline-block">
+                    <Link href="/" className="text-blue-600 hover:underline mb-6 inline-block font-mono">
                     🡨 Return to Flight Log
                     </Link>
                 </div>
@@ -90,7 +90,7 @@ export default function StatsPage() {
                   <div className="relative">
                     <select
                       id="year"
-                      className="appearance-none bg-white border border-gray-300 rounded-full px-3 py-1 pr-8 text-sm font-mono shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-400 transition"
+                      className="appearance-none bg-white border border-gray-300 rounded-full px-3 py-1 pr-8 text-sm font-mono shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-400 transition cursor-pointer"
                       value={selectedYear}
                       onChange={e =>
                         setSelectedYear(e.target.value === 'all' ? 'all' : Number(e.target.value))
@@ -131,7 +131,7 @@ export default function StatsPage() {
                         {["year", "month", "weekday"].map(mode => (
                             <button
                                 key={mode}
-                                className={`px-3 py-1 rounded-full font-mono text-sm ${
+                                className={`px-3 py-1 rounded-full font-mono text-sm cursor-pointer ${
                                     flightsPerMode === mode
                                         ? "bg-black text-white"
                                         : "bg-gray-200 text-gray-700"
@@ -158,7 +158,7 @@ export default function StatsPage() {
                     </div>
                     <div className="flex justify-center gap-2 mb-5">
                         <button
-                            className={`px-3 py-1 rounded-full font-mono text-sm ${
+                            className={`px-3 py-1 rounded-full font-mono text-sm cursor-pointer ${
                                 distanceSort === "desc" ? "bg-black text-white" : "bg-gray-200 text-gray-700"
                             }`}
                             onClick={() => setDistanceSort("desc")}
@@ -166,7 +166,7 @@ export default function StatsPage() {
                             Longest
                         </button>
                         <button
-                            className={`px-3 py-1 rounded-full font-mono text-sm ${
+                            className={`px-3 py-1 rounded-full font-mono text-sm cursor-pointer ${
                                 distanceSort === "asc" ? "bg-black text-white" : "bg-gray-200 text-gray-700"
                             }`}
                             onClick={() => setDistanceSort("asc")}
@@ -209,7 +209,7 @@ export default function StatsPage() {
                     </div>
                     <div className="flex justify-center gap-2 mb-5">
                         <button
-                            className={`px-3 py-1 rounded-full font-mono text-sm ${
+                            className={`px-3 py-1 rounded-full font-mono text-sm cursor-pointer ${
                                 airportSort === "desc" ? "bg-black text-white" : "bg-gray-200 text-gray-700"
                             }`}
                             onClick={() => setAirportSort("desc")}
@@ -217,7 +217,7 @@ export default function StatsPage() {
                             Most
                         </button>
                         <button
-                            className={`px-3 py-1 rounded-full font-mono text-sm ${
+                            className={`px-3 py-1 rounded-full font-mono text-sm cursor-pointer ${
                                 airportSort === "asc" ? "bg-black text-white" : "bg-gray-200 text-gray-700"
                             }`}
                             onClick={() => setAirportSort("asc")}
