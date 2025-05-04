@@ -23,9 +23,8 @@ export function getFlightsPerData(flights: Flight[], mode: "year" | "month" | "w
         const days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
         return days.map(d => ({ label: d, value: counts[d] || 0 }));
     }
-    // For year, sort descending
     return Object.entries(counts)
-        .sort((a, b) => b[0].localeCompare(a[0]))
+        .sort((a, b) => a[0].localeCompare(b[0]))
         .map(([label, value]) => ({ label, value }));
 }
 

@@ -144,9 +144,9 @@ export default function StatsPage() {
                 <section className="mb-8 rounded-xl border p-6 shadow-sm">
                     <h2 className="text-2xl font-bold mb-5 text-center">Flights</h2>
                     <div className="flex gap-4 text-md font-mono justify-between">
-                        <span><span className="font-bold">{domesticCount}</span> Domestic</span>
-                        <span><span className="font-bold">{internationalCount}</span> International</span>
-                        <span><span className="font-bold">{longHaulCount}</span> Long-haul</span>
+                        <span><span className="font-bold text-base md:text-lg">{domesticCount}</span> <span className="text-sm md:text-base">Domestic</span></span>
+                        <span><span className="font-bold text-base md:text-lg">{internationalCount}</span> <span className="text-sm md:text-base">International</span></span>
+                        <span><span className="font-bold text-base md:text-lg">{longHaulCount}</span> <span className="text-sm md:text-base">Long&#8209;haul</span></span>
                     </div>
                 </section>
 
@@ -171,7 +171,7 @@ export default function StatsPage() {
                         ))}
                     </div>
                     <ResponsiveContainer width="100%" height={220}>
-                        <BarChart data={flightsPerData}>
+                        <BarChart data={flightsPerData} margin={{ left: -30, right: 0, top: 0, bottom: 0 }}>
                             <XAxis dataKey="label" />
                             <YAxis allowDecimals={false} />
                             <Bar dataKey="value" fill="#2272c7" radius={[6, 6, 0, 0]} />
