@@ -9,9 +9,9 @@ type InsertFlight = typeof flights.$inferInsert;
 
 export async function PATCH(
   request: Request,
-  context: { params: { id: string } } | Promise<{ params: { id: string } }>
+  context: { params: { id: string } }
 ) {
-  const { params } = await context;
+  const { params } = context;
   const id = Number(params.id);
 
   try {
@@ -58,9 +58,9 @@ export async function PATCH(
 
 export async function DELETE(
   request: Request,
-  context: { params: { id: string } } | Promise<{ params: { id: string } }>
+  context: { params: { id: string } }
 ) {
-  const { params } = await context;
+  const { params } = context;
   const id = Number(params.id);
 
   try {
