@@ -4,13 +4,17 @@
 import { useState, useEffect } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import { Toaster} from "sonner";
+import { useUser } from "@clerk/nextjs";
 
 import AddFlightForm from "./flights/AddFlightForm";
 import FlightTable from "./flights/FlightTable";
 import Overview from "./flights/Overview";
 import type { Flight } from "./flights/FlightTable";
 import { calculateStats } from "./flights/utils";
+import SignInPopup from "@/components/SignInPopup";
+
 export default function Home() {
+  const { isLoaded, isSignedIn } = useUser();
   const [open, setOpen] = useState(false);
   const [flights, setFlights] = useState<Flight[]>([]);
   const [loading, setLoading] = useState(true);
@@ -21,7 +25,13 @@ export default function Home() {
     setError(null);
     try {
       const res = await fetch("/api/flights");
-      if (!res.ok) throw new Error("Failed to fetch flights");
+      if (!res.ok) {
+        if (res.status === 401) {
+          setError("Please sign in to view your flights");
+          return;
+        }
+        throw new Error("Failed to fetch flights");
+      }
       const data = await res.json();
       setFlights(data.data || []);
     } catch (err) {
@@ -36,6 +46,14 @@ export default function Home() {
   useEffect(() => {
     fetchFlights();
   }, []);
+
+  if (!isLoaded) {
+    return <div className="flex justify-center items-center h-screen">Loading...</div>;
+  }
+
+  if (error === "Please sign in to view your flights") {
+    return <SignInPopup />;
+  }
 
   return (
     <main className="container mx-auto p-4">

@@ -3,14 +3,19 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 import type { Flight } from "../flights/FlightTable";
 import Overview from "../flights/Overview";
 import { calculateStats } from "../flights/utils";
 import { getCountry, findAirportByCode, calculateDistance } from "@/lib/airports";
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, LabelList } from "recharts";
 import { getFlightsPerData, getRouteDistances, getAirportVisits, getUniqueCountryCodes } from "./statsUtils";
+import SignInPopup from "@/components/SignInPopup";
 
 export default function StatsPage() {
+    const { isLoaded, isSignedIn } = useUser();
+    const router = useRouter();
     const [flights, setFlights] = useState<Flight[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -19,24 +24,40 @@ export default function StatsPage() {
     const [distanceSort, setDistanceSort] = useState<"desc" | "asc">("desc");
     const [airportSort, setAirportSort] = useState<"desc" | "asc">("desc");
 
-    useEffect(() => {
-        async function fetchFlights() {
-            setLoading(true);
-            setError(null);
-            try {
-                const res = await fetch("/api/flights");
-                if (!res.ok) throw new Error("Failed to fetch flights");
-                const data = await res.json();
-                setFlights(data.data || []);
-            } catch (err) {
-                setError("Failed to load flights. Please try again.");
-                setFlights([]);
-            } finally {
-                setLoading(false);
+    async function fetchFlights() {
+        setLoading(true);
+        setError(null);
+        try {
+            const res = await fetch("/api/flights");
+            if (!res.ok) {
+                if (res.status === 401) {
+                    setError("Please sign in to view your flights");
+                    return;
+                }
+                throw new Error("Failed to fetch flights");
             }
+            const data = await res.json();
+            setFlights(data.data || []);
+        } catch (err) {
+            console.error("Error fetching flights:", err);
+            setError("Failed to load flights. Please try again.");
+            setFlights([]);
+        } finally {
+            setLoading(false);
         }
+    }
+
+    useEffect(() => {
         fetchFlights();
     }, []);
+
+    if (!isLoaded) {
+        return <div className="flex justify-center items-center h-screen">Loading...</div>;
+    }
+
+    if (error === "Please sign in to view your flights") {
+        return <SignInPopup />;
+    }
 
     const years = Array.from(
         new Set(flights.map(flight => new Date(flight.date).getFullYear()))

@@ -1,38 +1,56 @@
 // src/app/map/page.tsx
 "use client";
 
-import Link from "next/link";
 import { useState, useEffect } from "react";
-import type { Flight } from "../flights/FlightTable";
+import { useUser } from "@clerk/nextjs";
 import dynamic from "next/dynamic";
+import Link from "next/link";
+import SignInPopup from "@/components/SignInPopup";
+import type { Flight } from "../flights/FlightTable";
 
-// Dynamically import FlightMap with SSR disabled
-const FlightMap = dynamic(() => import("./FlightMap"), { ssr: false });
+const Map = dynamic(() => import("./FlightMap"), { ssr: false });
 
 export default function MapPage() {
+    const { isLoaded, isSignedIn } = useUser();
     const [flights, setFlights] = useState<Flight[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [selectedYear, setSelectedYear] = useState<"all" | number>("all");
 
-    useEffect(() => {
-        async function fetchFlights() {
-            setLoading(true);
-            setError(null);
-            try {
-                const res = await fetch("/api/flights");
-                if (!res.ok) throw new Error("Failed to fetch flights");
-                const data = await res.json();
-                setFlights(data.data || []);
-            } catch (err) {
-                setError("Failed to load flights. Please try again.");
-                setFlights([]);
-            } finally {
-                setLoading(false);
+    async function fetchFlights() {
+        setLoading(true);
+        setError(null);
+        try {
+            const res = await fetch("/api/flights");
+            if (!res.ok) {
+                if (res.status === 401) {
+                    setError("Please sign in to view your flights");
+                    return;
+                }
+                throw new Error("Failed to fetch flights");
             }
+            const data = await res.json();
+            setFlights(data.data || []);
+        } catch (err) {
+            console.error("Error fetching flights:", err);
+            setError("Failed to load flights. Please try again.");
+            setFlights([]);
+        } finally {
+            setLoading(false);
         }
+    }
+
+    useEffect(() => {
         fetchFlights();
     }, []);
+
+    if (!isLoaded) {
+        return <div className="flex justify-center items-center h-screen">Loading...</div>;
+    }
+
+    if (error === "Please sign in to view your flights") {
+        return <SignInPopup />;
+    }
 
     const years = Array.from(
         new Set(flights.map(flight => new Date(flight.date).getFullYear()))
@@ -83,7 +101,9 @@ export default function MapPage() {
                 </div>
 
                 {/* Map Section */}
-                <FlightMap flights={filteredFlights} />
+                <div className="h-[600px] w-full">
+                    <Map flights={filteredFlights} />
+                </div>
             </div>
         </main>
     );
