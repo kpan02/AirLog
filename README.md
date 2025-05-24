@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## ✈️ AirLog
 
-## Getting Started
+**AirLog** is a web app for logging and visualizing your air travel history. Users can record flights, view personalized travel statistics, and explore their journeys through interactive maps.
 
-First, run the development server:
+Live Site: [airlog.vercel.app](https://airlog.vercel.app)  
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<br>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **User Accounts**  
+  Sign up, log in, and manage personal flight data securely with Clerk.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Flight Logging**  
+  Add flights by searching for departure/arrival airport codes and departure date. Filter and sort flight history.
 
-## Learn More
+- **Travel Stats**  
+  See comprehensive flight statistics, airports visited, and countries traveled. 
 
-To learn more about Next.js, take a look at the following resources:
+- **Interactive Map**  
+  Visualize routes on a world map.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<br>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Tech Stack
 
-## Deploy on Vercel
+**Frontend:** [Next.js](https://nextjs.org/), [React 19](https://react.dev/), [Tailwind CSS](https://tailwindcss.com/), TypeScript <br>
+**Backend:** [PostgreSQL](https://www.postgresql.org/) via [Neon](https://neon.tech/), [Drizzle ORM](https://orm.drizzle.team/)  
+**Libraries:** [Clerk](https://clerk.com/) (auth), [Radix UI](https://www.radix-ui.com/) (UI primitives), [MUI](https://mui.com/) (components), [Recharts](https://recharts.org/) (charts), [Leaflet](https://leafletjs.com/) + [React Leaflet](https://react-leaflet.js.org/) (maps)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
